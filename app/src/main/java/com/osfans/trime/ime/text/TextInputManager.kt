@@ -4,9 +4,16 @@
 
 package com.osfans.trime.ime.text
 
+import android.content.Context
+import android.content.DialogInterface
+import android.os.Build
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.R.style.Theme_AppCompat_DayNight_Dialog_Alert
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.osfans.trime.R
 import com.osfans.trime.core.Rime
@@ -364,7 +371,7 @@ class TextInputManager(
                     }
                 }
             }
-            KeyEvent.KEYCODE_VOICE_ASSIST -> Speech(trime).startListening() // Speech Recognition
+            KeyEvent.KEYCODE_VOICE_ASSIST -> switchToVoiceInputMethod()
             KeyEvent.KEYCODE_SETTINGS -> { // Settings
                 trime.lifecycleScope.launch {
                     when (event.option) {
@@ -526,6 +533,28 @@ class TextInputManager(
             Candidate.PAGE_DOWN_BUTTON -> onKey(KeyEvent.KEYCODE_PAGE_DOWN, 0)
             Candidate.PAGE_EX_BUTTON -> trime.selectLiquidKeyboard(SymbolBoardType.CANDIDATE)
         }
+    }
+
+    private fun switchToVoiceInputMethod() {
+        val imm = trime.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val list: List<InputMethodInfo> = imm.enabledInputMethodList
+        for (el in list) {
+            for (i in 0 until el.subtypeCount) {
+                if (el.getSubtypeAt(i).mode != "voice") continue
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    trime.switchInputMethod(el.id)
+                    return
+                } else {
+                    trime.window.window?.let { window ->
+                        @Suppress("DEPRECATION")
+                        imm.setInputMethod(window.attributes.token, el.id)
+                        return
+                    }
+                }
+            }
+        }
+        // no voice input method, fail back to speech recognition
+        Speech(trime).startListening()
     }
 
     override fun onCandidateLongClicked(index: Int) {
