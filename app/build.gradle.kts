@@ -22,11 +22,11 @@ android {
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
-        applicationId = "com.osfans.trime"
+        applicationId = "com.thirtysparks.trime"
         minSdk = 21
         targetSdk = 34
         versionCode = 20240701
-        versionName = "3.2.19"
+        versionName = "3.2.19g"
 
         multiDexEnabled = true
         setProperty("archivesBaseName", "$applicationId-$buildVersionName")
@@ -54,13 +54,9 @@ android {
                         null
                     }
                 }
-
-            resValue("string", "trime_app_name", "@string/app_name_release")
         }
         debug {
             applicationIdSuffix = ".debug"
-
-            resValue("string", "trime_app_name", "@string/app_name_debug")
         }
     }
 

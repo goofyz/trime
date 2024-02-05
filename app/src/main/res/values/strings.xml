@@ -8,8 +8,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 <resources xmlns:xliff="urn:oasis:names:en:xliff:document:1.2">
     <!-- Input Method Platform Tittle  -->
-    <string name="app_name_release">Trime</string>
-    <string name="app_name_debug">Trime (Debug)</string>
+    <string name="trime_app_name">Trime G</string>
+    <string name="app_name_release">Trime G</string>
+    <string name="app_name_debug">Trime G (Debug)</string>
     <!-- Preference settings -->
     <string name="settings__help_title">Help</string>
     <string name="pref_wiki">Wiki</string>
