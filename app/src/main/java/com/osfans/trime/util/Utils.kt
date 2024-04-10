@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
-import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.osfans.trime.R
