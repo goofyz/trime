@@ -8,6 +8,7 @@ import androidx.annotation.Keep
 import com.osfans.trime.data.AppPrefs
 import com.osfans.trime.data.base.DataManager
 import com.osfans.trime.ime.symbol.TabManager
+import timber.log.Timber
 import java.io.File
 
 object ThemeManager {
@@ -61,7 +62,14 @@ object ThemeManager {
 
     private val prefs = AppPrefs.defaultInstance().theme
 
-    fun init() = setNormalTheme(prefs.selectedTheme)
+    fun init() = setCachedTheme(prefs.selectedTheme)
+
+    private fun setCachedTheme(name: String) {
+        if (::activeTheme.isInitialized) {
+            if (name == activeTheme.name) return
+        }
+        setNormalTheme(name)
+    }
 
     fun setNormalTheme(name: String) {
         Theme(name).let {
