@@ -8,7 +8,6 @@ import androidx.annotation.Keep
 import com.osfans.trime.data.AppPrefs
 import com.osfans.trime.data.base.DataManager
 import com.osfans.trime.ime.symbol.TabManager
-import timber.log.Timber
 import java.io.File
 
 object ThemeManager {

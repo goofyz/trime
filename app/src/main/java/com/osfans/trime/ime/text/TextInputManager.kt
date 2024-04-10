@@ -5,15 +5,12 @@
 package com.osfans.trime.ime.text
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Build
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.R.style.Theme_AppCompat_DayNight_Dialog_Alert
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.osfans.trime.R
 import com.osfans.trime.core.Rime
