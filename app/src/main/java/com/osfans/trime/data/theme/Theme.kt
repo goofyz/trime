@@ -27,7 +27,7 @@ import timber.log.Timber
 import kotlin.system.measureTimeMillis
 
 /** 主题和样式配置  */
-class Theme(name: String) {
+class Theme(val name: String) {
     val style: Style
     val liquid: Liquid
     val keyboards: Keyboards
