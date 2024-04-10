@@ -48,7 +48,6 @@ class Config(private val data: ConfigData = ConfigData()) {
         path: String,
         defValue: Boolean = false,
     ): Boolean {
-        Timber.d("read: $path")
         val p = data.traverse(path)?.configValue
         return runCatching { p?.getBool() }.getOrNull() ?: defValue
     }
@@ -57,7 +56,6 @@ class Config(private val data: ConfigData = ConfigData()) {
         path: String,
         defValue: Int = 0,
     ): Int {
-        Timber.d("read: $path")
         val p = data.traverse(path)?.configValue
         return runCatching { p?.getInt() }.getOrNull() ?: defValue
     }
@@ -66,7 +64,6 @@ class Config(private val data: ConfigData = ConfigData()) {
         path: String,
         defValue: Float = 0f,
     ): Float {
-        Timber.d("read: $path")
         val p = data.traverse(path)?.configValue
         return runCatching { p?.getFloat() }.getOrNull() ?: defValue
     }
@@ -75,28 +72,23 @@ class Config(private val data: ConfigData = ConfigData()) {
         path: String,
         defValue: String = "",
     ): String {
-        Timber.d("read: $path")
         val p = data.traverse(path)?.configValue
         return runCatching { p?.getString() }.getOrNull() ?: defValue
     }
 
     fun getItem(path: String): ConfigItem? {
-        Timber.d("read: $path")
         return data.traverse(path)
     }
 
     fun getValue(path: String): ConfigValue? {
-        Timber.d("read: $path")
         return data.traverse(path)?.configValue
     }
 
     fun getList(path: String): ConfigList? {
-        Timber.d("read: $path")
         return data.traverse(path)?.configList
     }
 
     fun getMap(path: String): ConfigMap? {
-        Timber.d("read: $path")
         return data.traverse(path)?.configMap
     }
 
