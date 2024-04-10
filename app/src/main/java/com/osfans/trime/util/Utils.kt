@@ -112,36 +112,4 @@ inline fun Context.isStorageAvailable(): Boolean {
         Environment.getExternalStorageDirectory().absolutePath.isNotEmpty()
 }
 
-fun Context.requestExternalStoragePermission() {
-    XXPermissions.with(this)
-        .permission(Permission.MANAGE_EXTERNAL_STORAGE)
-        .request(
-            object : OnPermissionCallback {
-                override fun onGranted(
-                    permissions: List<String>,
-                    all: Boolean,
-                ) {
-                    if (all) {
-                        ToastUtils.showShort(R.string.external_storage_permission_granted)
-                    }
-                }
-
-                override fun onDenied(
-                    permissions: List<String>,
-                    never: Boolean,
-                ) {
-                    if (never) {
-                        ToastUtils.showShort(R.string.external_storage_permission_denied)
-                        XXPermissions.startPermissionActivity(
-                            this@requestExternalStoragePermission,
-                            permissions,
-                        )
-                    } else {
-                        ToastUtils.showShort(R.string.external_storage_permission_denied)
-                    }
-                }
-            },
-        )
-}
-
 fun Configuration.isNightMode() = uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
