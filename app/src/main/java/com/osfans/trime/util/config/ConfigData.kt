@@ -61,7 +61,6 @@ class ConfigData {
     }
 
     fun traverse(path: String): ConfigItem? {
-        Timber.d("traverse: $path")
         if (path.isEmpty() || path == "/") return root
         val keys = path.trimEnd('/').split('/')
         var p = root

@@ -788,7 +788,6 @@ class KeyboardView
                 val drawableState = key.currentDrawableState
                 keyBackground = key.getBackColorForState(drawableState)
                 if (keyBackground == null) {
-                    Timber.d("onBufferDraw() keyBackground==null, key=%s", key.getLabel())
                     try {
                         val index = mKeyBackColor.indexOfStateSet(drawableState)
                         keyBackground = mKeyBackColor.stateDrawableAt(index)
