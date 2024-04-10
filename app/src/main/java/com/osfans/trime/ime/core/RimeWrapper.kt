@@ -4,6 +4,7 @@ import android.os.Looper
 import androidx.core.os.HandlerCompat
 import com.osfans.trime.core.Rime
 import com.osfans.trime.data.DataManager
+import com.osfans.trime.data.theme.ThemeManager
 import com.osfans.trime.util.appContext
 import com.osfans.trime.util.isStorageAvailable
 import kotlinx.coroutines.CoroutineScope
@@ -40,6 +41,7 @@ object RimeWrapper {
                     scope.launch {
                         measureTimeMillis {
                             Rime.getInstance(false)
+                            ThemeManager.init()
                         }.also {
                             Timber.d("Startup completed.  It takes ${it / 1000} seconds")
                         }
@@ -52,6 +54,7 @@ object RimeWrapper {
                     }
                 } else {
                     mutex.unlock()
+                    runCheck()
                 }
             }
         } else {

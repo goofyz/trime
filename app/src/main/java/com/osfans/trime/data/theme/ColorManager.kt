@@ -95,7 +95,6 @@ object ColorManager {
 
     fun init(configuration: Configuration) {
         isNightMode = configuration.isNightMode()
-        ThemeManager.init()
     }
 
     fun onSystemNightModeChange(isNight: Boolean) {

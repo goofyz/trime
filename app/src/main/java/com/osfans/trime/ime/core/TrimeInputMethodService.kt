@@ -371,7 +371,9 @@ open class TrimeInputMethodService : LifecycleInputMethodService() {
             performEscape()
         }
         super.onConfigurationChanged(newConfig)
-        ColorManager.onSystemNightModeChange(newConfig.isNightMode())
+        RimeWrapper.startup {
+            ColorManager.onSystemNightModeChange(newConfig.isNightMode())
+        }
     }
 
     override fun onUpdateCursorAnchorInfo(cursorAnchorInfo: CursorAnchorInfo) {
