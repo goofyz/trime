@@ -21,7 +21,7 @@ object ThemePickerDialog {
     ): AlertDialog {
         val all =
             withContext(Dispatchers.IO) {
-                ThemeManager.getAllThemes()
+                ThemeManager.getAllThemes().toSortedSet().toList()
             }
         val allNames =
             all.map {
