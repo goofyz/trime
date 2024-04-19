@@ -63,3 +63,5 @@ include_directories("${X11Keysym}")
 include(Rime)
 
 add_subdirectory(librime_jni)
+
+set(ENABLE_LOGGING FALSE OFF)
