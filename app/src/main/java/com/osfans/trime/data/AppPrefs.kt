@@ -349,7 +349,9 @@ class AppPrefs(
             const val LAST_BACKGROUND_SYNC = "profile_last_background_sync"
             const val URI_PREFIX = "content://com.android.externalstorage.documents/"
 
-            fun getAppPath(): String = PathUtils.getFilesPathExternalFirst()
+            fun getAppPath(): String {
+                return PathUtils.getExternalAppFilesPath()
+            }
 
             fun getAppUserDir() = getAppPath() + "/user"
 
