@@ -7,7 +7,6 @@ package com.osfans.trime.ui.components
 import android.content.Context
 import android.content.Intent
 import android.content.res.TypedArray
-import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.activity.result.ActivityResultLauncher
@@ -35,7 +34,7 @@ class FolderPickerPreference
             context.theme.obtainStyledAttributes(attrs, R.styleable.FolderPickerPreferenceAttrs, 0, 0).run {
                 try {
                     if (getBoolean(R.styleable.FolderPickerPreferenceAttrs_useSimpleSummaryProvider, false)) {
-                        summaryProvider = SummaryProvider<FolderPickerPreference> { it.value }
+                        summaryProvider = SummaryProvider<FolderPickerPreference> { getDisplayValue(it.value) }
                     }
                 } finally {
                     recycle()
@@ -68,7 +67,7 @@ class FolderPickerPreference
         override fun onClick() = showPickerDialog()
 
         private fun showPickerDialog() {
-            val initValue = value
+            val initValue = getDisplayValue(value)
             dialogView = FolderPickerDialogBinding.inflate(LayoutInflater.from(context))
             dialogView.editText.setText(initValue)
             dialogView.button.setOnClickListener {
