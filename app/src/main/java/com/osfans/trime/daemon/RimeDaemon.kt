@@ -124,8 +124,7 @@ object RimeDaemon {
     private const val CHANNEL_ID = "rime-daemon"
     private var restartId = 0
 
-    private fun postNotification(id: Int){
-
+    private fun postNotification(id: Int) {
         NotificationCompat.Builder(appContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_sync_24)
             .setContentTitle(appContext.getString(R.string.rime_daemon))
@@ -144,7 +143,7 @@ object RimeDaemon {
             realRime.finalize()
             realRime.startup(fullCheck)
 
-            if(realRime.isStarting) {
+            if (realRime.isStarting) {
                 val id = restartId++
                 postNotification(id)
                 TrimeApplication.getInstance().coroutineScope.launch {
