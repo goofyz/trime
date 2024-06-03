@@ -8,12 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.TypedArray
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import androidx.activity.result.ActivityResultLauncher
-import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
 import com.osfans.trime.R
-import com.osfans.trime.databinding.FolderPickerDialogBinding
 import com.osfans.trime.ui.setup.SetupFragment
 
 class FolderPickerPreference
@@ -25,8 +22,6 @@ class FolderPickerPreference
     ) : Preference(context, attrs, defStyleAttr) {
         private var value = ""
         lateinit var documentTreeLauncher: ActivityResultLauncher<Intent?>
-        lateinit var dialogView: FolderPickerDialogBinding
-        private var tempValue = ""
 
         var default = ""
 
@@ -64,26 +59,8 @@ class FolderPickerPreference
             value = getPersistedString(defaultValue as? String ?: default)
         }
 
-        override fun onClick() = showPickerDialog()
-
-        private fun showPickerDialog() {
-            val initValue = getDisplayValue(value)
-            dialogView = FolderPickerDialogBinding.inflate(LayoutInflater.from(context))
-            dialogView.editText.setText(initValue)
-            dialogView.button.setOnClickListener {
-                documentTreeLauncher.launch(SetupFragment.getFolderIntent())
-            }
-            AlertDialog.Builder(context)
-                .setTitle(this@FolderPickerPreference.title)
-                .setView(dialogView.root)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val value = tempValue
-                    if (value.isNotBlank()) {
-                        setValue(value)
-                    }
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .show()
+        override fun onClick()  {
+            documentTreeLauncher.launch(SetupFragment.getFolderIntent())
         }
 
         private fun setValue(value: String) {
@@ -94,8 +71,9 @@ class FolderPickerPreference
         }
 
         fun assignValue(value: String) {
-            tempValue = value
-            dialogView.editText.text = getDisplayValue(value)
+            if (value.isNotBlank()) {
+                setValue(value)
+            }
         }
 
         private fun getDisplayValue(value: String): String {
