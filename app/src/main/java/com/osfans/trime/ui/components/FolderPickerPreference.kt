@@ -59,7 +59,7 @@ class FolderPickerPreference
             value = getPersistedString(defaultValue as? String ?: default)
         }
 
-        override fun onClick()  {
+        override fun onClick() {
             documentTreeLauncher.launch(SetupFragment.getFolderIntent())
         }
 
